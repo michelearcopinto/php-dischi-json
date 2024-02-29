@@ -5,6 +5,8 @@ const app = createApp({
     return {
       apiUrl: "server.php",
       discsArray: [],
+      pickedDisc: 0,
+      overlayOpen: false,
     };
   },
   created() {
@@ -15,6 +17,9 @@ const app = createApp({
       axios.get(this.apiUrl).then((response) => {
         this.discsArray = response.data;
       });
+    },
+    push(index) {
+      this.pickedDisc = index;
     },
   },
 }).mount("#app");

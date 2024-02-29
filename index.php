@@ -22,37 +22,79 @@
         .card-box {
             background-color: #112030;
         }
+
+        .card-box:hover {
+            cursor: pointer;
+            filter: brightness(50%);
+        }
+
+        #selected-disc {
+            background-color: #112030F0;
+            top: 15px;
+            left: 20px;
+            right: 20px;
+            bottom: 15px;
+        }
+
+        #close-button i {
+            border: 1px solid white;
+            padding-block: 4px;
+            padding-inline: 6px;
+        }
+
+        #close-button i:hover {
+            cursor: pointer;
+            border-color: grey;
+            color: grey;
+        }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <header>
-            <div class="container p-3">
-                <figure>
-                    <img class="d-block" src="./assets/img/spotify.svg" alt="header_logo">
-                </figure>
-            </div>
-        </header>
+        <div class="position-relative">
+            <header>
+                <div class="container p-3">
+                    <figure>
+                        <img class="d-block" src="./assets/img/spotify.svg" alt="header_logo">
+                    </figure>
+                </div>
+            </header>
 
-        <main>
-            <div class="container">
-                <div class="row g-3">
-                    <div v-for="(disc, index) in discsArray" key="index" class="col-4">
-                        <div class="card-box text-white text-center rounded-3 py-4 px-5 h-100">
-                            <figure class="mb-0">
-                                <img class="d-block w-100" :src="disc.poster" :alt="`poster-disc-${index}`">
-                            </figure>
-                            <div class="d-flex flex-column gap-3 py-3">
-                                <h4 class="mb-0">{{disc.title}}</h4>
-                                <span>{{disc.author}}</span>
-                                <h5 class="mb-0">{{disc.year}}</h5>
+            <main>
+                <div class="container">
+                    <div class="row g-3">
+                        <div v-for="(disc, index) in discsArray" key="index" class="col-4">
+                            <div class="card-box text-white text-center rounded-3 py-4 px-5 h-100" @click="push(index); overlayOpen = !overlayOpen">
+                                <figure class="mb-0">
+                                    <img class="d-block w-100" :src="disc.poster" :alt="`poster-disc-${index}`">
+                                </figure>
+                                <div class="d-flex flex-column gap-3 py-3">
+                                    <h4 class="mb-0">{{disc.title}}</h4>
+                                    <span>{{disc.author}}</span>
+                                    <h5 class="mb-0">{{disc.year}}</h5>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </main>
+            <div id="selected-disc" class="position-absolute text-white rounded-3 position-relative" :class="!overlayOpen ? 'd-none' : '' ">
+                <div id="close-button" class="position-absolute top-0 end-0 p-3">
+                    <i class="fas fa-xmark rounded-1" @click="overlayOpen = !overlayOpen"></i>
+                </div>
+                <div class="text-white position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center w-50">
+                    <figure class="mb-0">
+                        <img class="d-block" :src="discsArray[pickedDisc].poster" :alt="`poster-disc-${pickedDisc}`">
+                    </figure>
+                    <div class="d-flex flex-column align-items-center gap-3 py-3">
+                        <h4 class="mb-0">{{discsArray[pickedDisc].title}}</h4>
+                        <span>{{discsArray[pickedDisc].author}}</span>
+                        <h5 class="mb-0">{{discsArray[pickedDisc].year}}</h5>
+                    </div>
+                </div>
             </div>
-        </main>
+        </div>
     </div>
 
     <script src="https://unpkg.com/vue@3"></script>
