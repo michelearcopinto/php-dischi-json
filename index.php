@@ -42,14 +42,20 @@
 
         #close-button i {
             border: 1px solid white;
-            padding-block: 4px;
-            padding-inline: 6px;
+            padding-block: 10px;
+            padding-inline: 12px;
+            font-size: 20px;
         }
 
         #close-button i:hover {
             cursor: pointer;
             border-color: grey;
             color: grey;
+        }
+
+        #discs-container {
+            width: 70%;
+            margin-inline: auto;
         }
     </style>
 </head>
@@ -66,7 +72,7 @@
             </header>
 
             <main>
-                <div class="container">
+                <div id="discs-container">
                     <div class="row g-3">
                         <div v-for="(disc, index) in discsArray" key="index" class="col-4">
                             <div class="card-box text-white text-center rounded-3 py-4 px-5 h-100" @click="push(index); overlayOpen = !overlayOpen">
