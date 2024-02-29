@@ -36,6 +36,10 @@
             bottom: 15px;
         }
 
+        #selected-disc img {
+            width: 450px;
+        }
+
         #close-button i {
             border: 1px solid white;
             padding-block: 4px;
@@ -85,7 +89,7 @@
                 </div>
                 <div class="text-white position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center w-50">
                     <figure class="mb-0">
-                        <img class="d-block" :src="discsArray[pickedDisc].poster" :alt="`poster-disc-${pickedDisc}`">
+                        <img :src="discsArray[pickedDisc].poster" :alt="`poster-disc-${pickedDisc}`">
                     </figure>
                     <div class="d-flex flex-column align-items-center gap-3 py-3">
                         <h4 class="mb-0">{{discsArray[pickedDisc].title}}</h4>
